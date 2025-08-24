@@ -49,7 +49,7 @@ exerise_duration = (calories_data["exercises"][0]['duration_min'])
 sheets_endpoint = "https://api.sheety.co/25fddd07859d2666aebf5de29336aa50/trackWorkouts/workouts"
 
 sheets_header = {
-    "Authorization" : AUTHORIZATION,
+    "Authorization" : f"Bearer {AUTHORIZATION}",
 }
 
 today_date = datetime.now().strftime("%d/%m/%Y")
@@ -67,6 +67,6 @@ for exercise in calories_data['exercises']:
         }
     }
     # Posting the exercise to sheety and inturn passing it to my google sheets
-    sheet_response = requests.post(url=sheets_endpoint, json=sheet_inputs)
+    sheet_response = requests.post(url=sheets_endpoint, json=sheet_inputs, headers=sheets_header)
 
     print(sheet_response.text)
